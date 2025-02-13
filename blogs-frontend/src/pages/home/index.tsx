@@ -4,8 +4,8 @@ import PostCard from "@/components/PostCard";
 const Home = () => {
   // 假数据，后面可以用 API 获取
   const posts = [
-    { title: "第一篇文章", summary: "这是文章摘要..." },
-    { title: "第二篇文章", summary: "这是一篇很棒的博客..." },
+    { id: 1, title: "第一篇文章", summary: "这是文章摘要..." },
+    { id: 2, title: "第二篇文章", summary: "这是一篇很棒的博客..." },
   ];
 
   return (
