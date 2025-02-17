@@ -1,21 +1,32 @@
 import Navbar from "@/components/Navbar";
 import PostCard from "@/components/PostCard";
+import Timeline from "@/components/Timeline";
+import { useEffect, useState } from "react";
+import { getPostList } from "../../services/post";
+import Layout from "../../components/Layout";
 
 const Home = () => {
   // 假数据，后面可以用 API 获取
-  const posts = [
-    { id: 1, title: "第一篇文章", summary: "这是文章摘要..." },
-    { id: 2, title: "第二篇文章", summary: "这是一篇很棒的博客..." },
-  ];
+  const [posts, setPosts] = useState<[]>([])  
+
+  useEffect(() => {
+    getPosts()
+  },[])
+
+  const getPosts = async () => {
+    const res = await getPostList()
+    setPosts(res.data)
+  }
 
   return (
     <div>
-      <Navbar />
-      <div className="max-w-7xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map((post, index) => (
+      {/* <Navbar /> */}
+        {/* {posts.map((post, index) => (
           <PostCard key={index} post={post} />
-        ))}
-      </div>
+        ))} */}
+        <Layout>
+          <Timeline posts={posts} />
+        </Layout>
     </div>
   );
 };

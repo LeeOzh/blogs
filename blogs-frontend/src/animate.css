@@ -1,0 +1,30 @@
+@keyframes fadeInUpRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUpLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up-right {
+  animation: fadeInUpRight .6s ease-out forwards;
+}
+
+.animate-fade-in-up-left {
+  animation: fadeInUpLeft .6s ease-out forwards;
+}
+

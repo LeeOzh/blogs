@@ -5,8 +5,16 @@ import {PrismaService} from '../prisma/prisma.service'
 export class PostService {
   constructor (private prisma:  PrismaService) {}
 
-  getAllPosts() {
-    return this.prisma.post.findMany()
+  async getAllPosts() {
+    const posts = await this.prisma.post.findMany({
+      orderBy: { createdAt: 'desc' }, // 按时间倒序
+    });
+   
+    return {
+      code: 200,
+      data: posts,
+      msg: 'success'
+    }
   }
 
   getPostById(id: number) {
