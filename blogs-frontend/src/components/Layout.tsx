@@ -16,7 +16,7 @@ const Layout = () => {
       </header>
 
       {/* 左侧 - ABOUT */}
-      <aside className="row-span-2 flex items-center justify-center bg-gray-300 rotate-180 writing-mode-vertical-lr">
+      <aside className="row-span-2 flex items-center justify-center bg-gray-300  writing-mode-vertical-lr">
         <MeunItem text="ABOUT" to='/about' />
       </aside>
 
@@ -29,7 +29,7 @@ const Layout = () => {
 
       {/* 右侧 - CONTACT */}
       <aside className="row-span-2 flex items-center justify-center bg-gray-300 writing-mode-vertical-lr">
-        <MeunItem text="CONTACT" to='/contact' />
+        <MeunItem text="ADD" to='/add' />
       </aside>
 
       {/* 底部 - PROJECTS（调整高度） */}

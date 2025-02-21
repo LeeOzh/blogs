@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div>
-          <Timeline posts={posts} />
+        <Timeline posts={posts} />
     </div>
   );
 };

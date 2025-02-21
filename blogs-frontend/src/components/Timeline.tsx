@@ -1,5 +1,6 @@
 import { debug } from "console";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Timeline = ({ posts }: { posts: { id: number; title: string; content: string; createdAt: string; image?: string }[] }) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -50,11 +51,14 @@ const Timeline = ({ posts }: { posts: { id: number; title: string; content: stri
             {/* 文章卡片 */}
             <div 
             ref={containerRef}
-            className={`item-in bg-white shadow-lg rounded-lg p-6 w-3/12 z-10 ${index % 2 === 0 ? "ml-189" : "mr-189"} opacity-0 transform translate-y-10 transition-all duration-400 `}>
+            className={`item-in bg-white shadow-lg rounded-lg p-6 w-3/12 z-10 ${index % 2 === 0 ? "md:ml-[80%] lg:ml-[60%]" : "md:mr-[80%] lg:mr-[60%]"} opacity-0 transform translate-y-10 transition-all duration-400 `}>
               <p className="text-gray-500 text-sm">{new Date(post.createdAt).toLocaleDateString()}</p>
               <h2 className="text-xl font-bold">{post.title}</h2>
               {post.image && <img src={post.image} alt={post.title} className="my-3 rounded-lg" />}
               <p className="text-gray-700">{post.content.substring(0, 100)}...</p>
+              <Link to={`/post/${post.id}`} className="text-blue-500 mt-2 hover:underline">
+                阅读更多
+              </Link>
             </div>
           </div>
         ))}
