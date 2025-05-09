@@ -10,7 +10,9 @@ services:
       - .env
     depends_on:
       - db
-    restart: unless-stopped             # ✅ 显式设置工作目录，防止某些环境触发配置 bug
+    restart: unless-stopped    
+    networks:
+      - blog-network  # 使用外部网络         # ✅ 显式设置工作目录，防止某些环境触发配置 bug
 
   db:
     image: postgres:15
@@ -24,6 +26,12 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: unless-stopped
+    networks:
+      - blog-network  # 使用外部网络
 
 volumes:
   pgdata:
+
+networks:
+  blog-network:
+    external: true  # 使用外部网络
