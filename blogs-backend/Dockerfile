@@ -1,16 +1,20 @@
-# 使用官方 Node.js 镜像
-FROM node:22-alpine
+FROM node:18-alpine
 
-# 设置工作目录
 WORKDIR /app
 
-# 安装依赖
+# 拷贝依赖文件并安装
 COPY package.json yarn.lock ./
-RUN yarn install --production
+RUN yarn install
 
-# 复制编译后的 dist 文件
-COPY dist ./dist
+# 拷贝 Prisma 文件并生成客户端
+COPY prisma ./prisma
 COPY .env .env
+RUN npx prisma generate
 
-# 启动应用
+# 拷贝源代码并构建项目
+COPY tsconfig*.json ./
+COPY src ./src
+RUN yarn build
+
+# 启动 Nest 应用
 CMD ["node", "dist/main"]
