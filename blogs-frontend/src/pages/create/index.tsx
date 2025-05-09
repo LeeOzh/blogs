@@ -10,20 +10,20 @@ const CreatePost = () => {
       alert("标题和内容不能为空！");
       return;
     }
+    console.log(title,content)
+    // const response = await fetch("http://localhost:3000/posts", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ title, content }),
+    // });
 
-    const response = await fetch("http://localhost:3000/posts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, content }),
-    });
-
-    if (response.ok) {
-      alert("文章发布成功！");
-      setTitle("");
-      setContent("");
-    } else {
-      alert("发布失败，请重试！");
-    }
+    // if (response.ok) {
+    //   alert("文章发布成功！");
+    //   setTitle("");
+    //   setContent("");
+    // } else {
+    //   alert("发布失败，请重试！");
+    // }
   };
 
   return (

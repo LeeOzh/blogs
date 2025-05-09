@@ -3,6 +3,7 @@ import Home from "@/pages/home/index";
 import Post from "@/pages/post/index";
 import Layout from "@/components/Layout";
 import CreatePost from "@/pages/create";
+import Tools from "@/pages/tools";
 
 const AppRoutes = () => {
   return (
@@ -12,6 +13,7 @@ const AppRoutes = () => {
           <Route index element={<Home />} />
           <Route path="/post/:id" element={<Post />} />
           <Route path="/add" element={<CreatePost />} />
+          <Route path="/tools" element={<Tools />} />
         </Route>
       </Routes>
     </Router>

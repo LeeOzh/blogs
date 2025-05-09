@@ -1,5 +1,3 @@
-const = auto
-
 export default {
   content: [
     "./index.html",

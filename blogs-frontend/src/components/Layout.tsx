@@ -8,7 +8,7 @@ const  MeunItem = ({text, to}:{text: string, to: string}) => {
 const Layout = () => {
   
   return (
-    <div className="h-screen w-screen grid grid-rows-[80px_1fr] grid-cols-[80px_1fr_80px] text-white">
+    <div className="h-screen w-screen grid grid-rows-[80px_1fr] grid-cols-[80px_1fr_80px] text-black">
       
       {/* 顶部 - HOME */}
       <header className="col-span-3 flex items-center justify-center bg-gray-200 text-2xl font-bold">
@@ -17,7 +17,7 @@ const Layout = () => {
 
       {/* 左侧 - ABOUT */}
       <aside className="row-span-2 flex items-center justify-center bg-gray-300  writing-mode-vertical-lr">
-        <MeunItem text="ABOUT" to='/about' />
+        <MeunItem text="Tools" to='/tools' />
       </aside>
 
       {/* 主要内容区（可以滚动） */}
