@@ -7,6 +7,7 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 # 拷贝 Prisma 文件并生成客户端
+COPY prisma ./prisma
 COPY .env .env
 RUN npx prisma generate
 
