@@ -10,10 +10,7 @@ services:
       - .env
     depends_on:
       - db
-    restart: unless-stopped
-    volumes:                        # ✅ 显式声明 volumes，哪怕为空
-      - .:/app
-    working_dir: /app               # ✅ 显式设置工作目录，防止某些环境触发配置 bug
+    restart: unless-stopped             # ✅ 显式设置工作目录，防止某些环境触发配置 bug
 
   db:
     image: postgres:15
