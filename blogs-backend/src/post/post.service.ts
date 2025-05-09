@@ -23,11 +23,13 @@ export class PostService {
     })
   }
 
-  createPost(data:{title: string, content: string}) {
+  async createPost(data:{title: string, content: string}) {
+    // 需要使用 await 等待数据库操作完成
+    const post = await this.prisma.post.create({data})
     return {
       code: 200,
-      data,
-      msg:'success'
+      data: post,
+      msg: 'success'
     }
   }
 }
