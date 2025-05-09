@@ -24,6 +24,10 @@ export class PostService {
   }
 
   createPost(data:{title: string, content: string}) {
-    return this.prisma.post.create({data})
+    return {
+      code: 200,
+      data,
+      msg:'success'
+    }
   }
 }
