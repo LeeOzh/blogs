@@ -17,10 +17,15 @@ export class PostService {
     }
   }
 
-  getPostById(id: number) {
-    return this.prisma.post.findUnique({
+  async getPostById(id: number) {
+    const data = await this.prisma.post.findUnique({
       where: {id}
     })
+    return {
+      code: 200,
+      data,
+      msg:'success'
+    }
   }
 
   async createPost(data:{title: string, content: string}) {
