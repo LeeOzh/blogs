@@ -18,8 +18,8 @@ services:
     image: postgres:15
     container_name: postgres-db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: user594  
+      POSTGRES_PASSWORD: user395594
       POSTGRES_DB: blogdb
     ports:
       - "5432:5432"
