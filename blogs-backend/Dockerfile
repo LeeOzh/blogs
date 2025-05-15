@@ -20,4 +20,5 @@ RUN yarn build
 EXPOSE 3000
 
 # 启动 Nest 应用
-CMD ["node", "dist/main"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main"]
+

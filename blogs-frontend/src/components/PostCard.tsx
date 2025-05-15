@@ -55,7 +55,7 @@ const PostCard = (data:PostCardProps) => {
      <div className="rounded-xl w-full overflow-hidden bg-white">
       <div className="flex items-center pl-2.5 h-[50px]">
         <div className="rounded-[50%] overflow-hidden w-[30px] h-[30px] bg-gray-200 flex justify-between items-center ">
-          <img className="w-3/4 h-3/4" src="../../public/nm.svg" alt="" />
+          <img className="w-3/4 h-3/4" src="/nm.svg" alt="" />
         </div>
        <span className="ml-2"> 匿名牛马 - {new Date(data.createdAt).toLocaleDateString()}</span>
       </div>
@@ -68,8 +68,8 @@ const PostCard = (data:PostCardProps) => {
           </div>
         </Link>
         <div className="flex h-[40px] justify-center items-center">
-            {isLiked() == true && <img src="../../public/gooded.svg" className="w-[20px] cursor-pointer" onClick={() => {handleLike(data.id)}} />}
-            {isLiked() == false && <img src="../../public/good.svg" className="w-[20px] cursor-pointer" onClick={() => {handleLike(data.id)}} />}
+            {isLiked() == true && <img src="/gooded.svg" className="w-[20px] cursor-pointer" onClick={() => {handleLike(data.id)}} />}
+            {isLiked() == false && <img src="/good.svg" className="w-[20px] cursor-pointer" onClick={() => {handleLike(data.id)}} />}
              {data?.like }
           </div>
      </div>
