@@ -18,7 +18,7 @@ model Post {
   id        Int      @id @default(autoincrement())
   title     String
   content   String
-  imgUrl    String
+  imgUrl    String?  // ✅ 可选字段，自动允许为 null
   like      Int      @default(0)
-  createdAt  DateTime @default(now())
+  createdAt DateTime @default(now())
 }
