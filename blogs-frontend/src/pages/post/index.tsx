@@ -9,9 +9,17 @@ const Post = () => {
   const [data, setData] = useState<{
     title: string;
     content: string;
+    id:number
+    imgUrl:string
+    like: number
+    createdAt: string
   }>({
     title: '',
-    content: ''
+    content: '',
+    id:0,
+    imgUrl:'',
+    like:0,
+    createdAt:''
   });
 
   useEffect(() => {
@@ -27,14 +35,26 @@ const Post = () => {
   }
 
   const MarkdownRenderer = ({ content }) => {
-    return <div className="prose">
+    return <div className="prose w-full">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </div>
   };
 
   return (
     <div className="max-w-3xl mx-auto p-4" >
-      <h1 className="text-3xl font-bold">{data?.title}</h1>
+      <div className="w-full h-full overflow-hidden max-h-[200px]">
+        <img src={data.imgUrl} className="h-full object-cover " />
+      </div>
+      <p className="text-3xl font-bold mb-[10px]">{data?.title}</p>
+      <p className="text-xl text-gray-600 font-[500] mb-[20px]">匿名牛马 - {new Date(data.createdAt).toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      })}</p>
       <MarkdownRenderer content={data?.content} />
     </div>
   );
