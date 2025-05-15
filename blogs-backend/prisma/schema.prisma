@@ -18,5 +18,7 @@ model Post {
   id        Int      @id @default(autoincrement())
   title     String
   content   String
+  imgUrl    String
+  like      Int      @default(0)
   createdAt  DateTime @default(now())
 }

@@ -4,6 +4,7 @@ import { createPost } from "@/services/post";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [content, setContent] = useState<string | undefined>("");
 
   const handleSubmit = async () => {
@@ -12,7 +13,7 @@ const CreatePost = () => {
       return;
     }
     console.log(title,content)
-    const response = await createPost({ title, content });
+    const response = await createPost({ title, content, imgUrl });
 
     if (response?.data) {
       alert("留言成功");
@@ -32,6 +33,13 @@ const CreatePost = () => {
         placeholder="留言标题"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+      />
+      <input
+        type="text"
+        className="w-full p-2 border rounded mb-4"
+        placeholder="头图链接"
+        value={imgUrl}
+        onChange={(e) => setImgUrl(e.target.value)}
       />
       <MDEditor
         value={content}

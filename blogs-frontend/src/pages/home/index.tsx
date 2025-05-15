@@ -1,6 +1,7 @@
 import Timeline from "@/components/Timeline";
 import { useEffect, useState } from "react";
 import { getPostList } from "../../services/post";
+import PostList from "./components/PostList";
 
 const Home = () => {
   // 假数据，后面可以用 API 获取
@@ -14,10 +15,11 @@ const Home = () => {
     const res = await getPostList()
     setPosts(res.data)
   }
-
+  
   return (
     <div>
-        <Timeline posts={posts} />
+        <PostList posts={posts} callback={() => {getPosts()}} />
+        {/* <Timeline posts={posts} /> */}
     </div>
   );
 };

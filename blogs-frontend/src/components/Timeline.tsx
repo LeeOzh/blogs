@@ -54,7 +54,7 @@ const Timeline = ({ posts }: { posts: { id: number; title: string; content: stri
               <p className="text-gray-500 text-sm">{new Date(post.createdAt).toLocaleDateString()}</p>
               <h2 className="text-xl font-bold">{post.title}</h2>
               {post.image && <img src={post.image} alt={post.title} className="my-3 rounded-lg" />}
-              <p className="text-gray-700">{post.content.substring(0, 100)}...</p>
+              <p className="text-gray-700 overflow-ellipsis ">{post.content.substring(0, 100)}...</p>
               <Link to={`/post/${post.id}`} className="text-blue-500 mt-2 hover:underline">
                 阅读更多
               </Link>

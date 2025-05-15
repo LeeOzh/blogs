@@ -27,8 +27,8 @@ const Post = () => {
   }
 
   const MarkdownRenderer = ({ content }) => {
-    return <div>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>;
+    return <div className="prose">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </div>
   };
 

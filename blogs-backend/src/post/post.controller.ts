@@ -16,7 +16,12 @@ export class PostController {
   }
 
   @Post('create')
-  createPost(@Body() data: {title: string, content: string}) {
+  createPost(@Body() data: {title: string, content: string, imgUrl: string}) {
     return this.postService.createPost(data)
+  }
+
+  @Post('updateLike')
+  updatePost(@Body() data: {id: number, like: boolean}) {
+    return this.postService.updatePostLike(data)
   }
 }
