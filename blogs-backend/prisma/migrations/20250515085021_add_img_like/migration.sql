@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Post" ADD COLUMN     "imgUrl" TEXT,
+ADD COLUMN     "like" INTEGER NOT NULL DEFAULT 0;
