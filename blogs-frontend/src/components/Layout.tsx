@@ -21,7 +21,7 @@ const Layout = () => {
       </aside>
 
       {/* 主要内容区（可以滚动） */}
-      <main className="h-full w-full overflow-hidden bg-gray-100 p-10">
+      <main className="h-full w-full overflow-hidden bg-gray-100">
         <SimpleBar style={{maxHeight: '100%'}}>
           <Outlet />
         </SimpleBar>
@@ -34,7 +34,7 @@ const Layout = () => {
 
       {/* 底部 - PROJECTS（调整高度） */}
       <footer className="col-span-3 flex items-center justify-center bg-gray-200 h-[60px]">
-        <MeunItem text="PROJECTS" to='/projects' />
+        <MeunItem text="DRAW" to='/draw' />
       </footer>
     </div>
   );

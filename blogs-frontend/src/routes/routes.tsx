@@ -4,6 +4,7 @@ import Post from "@/pages/post/index";
 import Layout from "@/components/Layout";
 import CreatePost from "@/pages/create";
 import Tools from "@/pages/tools";
+import Draw from "@/pages/draw";
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
           <Route path="/post/:id" element={<Post />} />
           <Route path="/add" element={<CreatePost />} />
           <Route path="/tools" element={<Tools />} />
+          <Route path="/draw" element={<Draw />} />
         </Route>
       </Routes>
     </Router>
