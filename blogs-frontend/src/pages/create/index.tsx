@@ -25,18 +25,18 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="md:w-[100%] lg:w-[80%] mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold mb-4">留言</h1>
+    <div className="md:w-[100%] lg:w-[80%] mx-auto p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
+      <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">留言</h1>
       <input
         type="text"
-        className="w-full p-2 border rounded mb-4"
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded mb-4"
         placeholder="留言标题"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
         type="text"
-        className="w-full p-2 border rounded mb-4"
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded mb-4"
         placeholder="头图链接"
         value={imgUrl}
         onChange={(e) => setImgUrl(e.target.value)}
@@ -49,7 +49,7 @@ const CreatePost = () => {
       />
       <button
         onClick={handleSubmit}
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="mt-4 bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
       >
         发送留言
       </button>

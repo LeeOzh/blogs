@@ -35,7 +35,7 @@ const Post = () => {
   }
 
   const MarkdownRenderer = ({ content }) => {
-    return <div className="prose w-full">
+    return <div className="prose dark:prose-invert w-full max-w-none">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </div>
   };
@@ -45,8 +45,8 @@ const Post = () => {
       <div className="w-full h-full overflow-hidden max-h-[200px]">
         <img src={data.imgUrl} className="h-full object-cover " />
       </div>
-      <p className="text-3xl font-bold mb-[10px]">{data?.title}</p>
-      <p className="text-xl text-gray-600 font-[500] mb-[20px]">匿名牛马 - {new Date(data.createdAt).toLocaleString('zh-CN', {
+      <p className="text-3xl font-bold mb-[10px] text-gray-900 dark:text-white">{data?.title}</p>
+      <p className="text-xl text-gray-600 dark:text-gray-400 font-[500] mb-[20px]">匿名牛马 - {new Date(data.createdAt).toLocaleString('zh-CN', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',

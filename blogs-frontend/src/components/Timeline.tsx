@@ -43,19 +43,19 @@ const Timeline = ({ posts }: { posts: { id: number; title: string; content: stri
           <div key={post.id} className={`relative flex items-center w-full ${index % 2 === 0 ? "justify-start" : "justify-end"}`}>
             
             {/* 时间线上的圆点 */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-gray-500 rounded-full z-10">
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white dark:bg-gray-800 border-4 border-gray-500 dark:border-gray-400 rounded-full z-10">
             <div className={`absolute w-18 h-1 bg-gray-500 top-2/5  ${index % 2 === 0 ? "left-20/12" : "right-20/12"}`} ></div>
             </div>
 
             {/* 文章卡片 */}
             <div 
             ref={containerRef}
-            className={`item-in bg-white shadow-lg rounded-lg p-6 w-3/12 z-10 ${index % 2 === 0 ? "md:ml-[80%] lg:ml-[60%]" : "md:mr-[80%] lg:mr-[60%]"} opacity-0 transform translate-y-10 transition-all duration-400 `}>
-              <p className="text-gray-500 text-sm">{new Date(post.createdAt).toLocaleDateString()}</p>
-              <h2 className="text-xl font-bold">{post.title}</h2>
+            className={`item-in bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 w-3/12 z-10 ${index % 2 === 0 ? "md:ml-[80%] lg:ml-[60%]" : "md:mr-[80%] lg:mr-[60%]"} opacity-0 transform translate-y-10 transition-all duration-400 `}>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">{new Date(post.createdAt).toLocaleDateString()}</p>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">{post.title}</h2>
               {post.image && <img src={post.image} alt={post.title} className="my-3 rounded-lg" />}
-              <p className="text-gray-700 overflow-ellipsis ">{post.content.substring(0, 100)}...</p>
-              <Link to={`/post/${post.id}`} className="text-blue-500 mt-2 hover:underline">
+              <p className="text-gray-700 dark:text-gray-300 overflow-ellipsis ">{post.content.substring(0, 100)}...</p>
+              <Link to={`/post/${post.id}`} className="text-blue-500 dark:text-blue-400 mt-2 hover:underline">
                 阅读更多
               </Link>
             </div>

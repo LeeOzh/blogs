@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 type TabItem = {
   title: string;
@@ -27,19 +27,19 @@ const Tab:React.FunctionComponent<TabProps> = ({
   };
 
   const tabClassName = {
-    'horizontal': 'flex flex-row min-w-[40px] min-h-[40px]',
-    'vertical': 'flex flex-col min-w-[80px] min-h-[40px]'
+    'horizontal': 'flex flex-row min-w-[40px] min-h-[40px] bg-white/10 dark:bg-gray-800/20 backdrop-blur-md border border-gray-200/30 dark:border-gray-600/30 rounded-lg shadow-sm',
+    'vertical': 'flex flex-col min-w-[80px] min-h-[40px] bg-white/10 dark:bg-gray-800/20 backdrop-blur-md border border-gray-200/30 dark:border-gray-600/30 rounded-lg shadow-sm'
   }
 
   const activedClassName = {
-    'horizontal': 'bg-gray-200 border-b-2 border-[#297aff]',
-    'vertical': 'bg-gray-200 border-r-2 border-[#297aff]'
+    'horizontal': 'bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border-b-2 border-[#297aff]',
+    'vertical': 'bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border-r-2 border-[#297aff]'
   }
 
   return <div>
     <div className={tabClassName[align]}>
       {items.map((item,index) => <div 
-      className={`p-2 text-center font-bold min-h-[40px] leading-[40px] ${index == activeIndex && 'text-[#297aff]'} ${activeIndex === items.indexOf(item) ? activedClassName[align] : ''}`} 
+      className={`p-2 text-center font-bold min-h-[40px] leading-[40px] text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-white/10 dark:hover:bg-gray-800/20 hover:backdrop-blur-sm transition-all duration-200 ${index == activeIndex && 'text-[#297aff] dark:text-[#4a9eff]'} ${activeIndex === items.indexOf(item) ? activedClassName[align] : ''}`} 
       key={item.value}
       onClick={() => handleTabClick(index)}
       >

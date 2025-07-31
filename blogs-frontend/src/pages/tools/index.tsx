@@ -177,68 +177,68 @@ const AboutPage = () => {
   },[monthlySalary,workDaysPerMonth,])
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', color: '#333', maxWidth: '600px', margin: '0 auto', backgroundColor: '#f9f9f9', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
-      <h1 style={{fontSize:24, textAlign: 'center', color: '#1a73e8', marginBottom: '25px'}}>牛马粮食计算器</h1>
-      <div style={{marginBottom:10}}>
-      <label htmlFor="monthlySalary" style={labelStyle}>关键信息是否展示: </label> 
+    <div className="p-5 font-sans text-gray-800 dark:text-gray-200 max-w-2xl mx-auto bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg">
+      <h1 className="text-2xl text-center text-blue-600 dark:text-blue-400 mb-6 font-bold">牛马粮食计算器</h1>
+      <div className="mb-4">
+      <label htmlFor="monthlySalary" className="inline-block min-w-[150px] text-gray-700 dark:text-gray-300">关键信息是否展示: </label> 
       <label className="switch">
         <input type="checkbox" onChange={(e) => {setShowSalary(e.target.checked)}}/>
         <span className="slider"></span>
       </label>
       
       </div>
-      <div style={formRowStyle}> 
-        <label htmlFor="monthlySalary" style={labelStyle}>月薪 (元): </label>
+      <div className="mb-4"> 
+        <label htmlFor="monthlySalary" className="inline-block min-w-[150px] text-gray-700 dark:text-gray-300">月薪 (元): </label>
         <input 
           type={showSalary?'number':'password'}
           id="monthlySalary" 
           value={monthlySalary}
           onChange={(e) => setMonthlySalary(Number(e.target.value))}
-          style={inputStyle}
+          className="p-1 ml-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[calc(100%-160px)]"
         />
       </div>
-      <div style={formRowStyle}>
-        <label htmlFor="workDaysPerMonth" style={labelStyle}>每月工作天数: </label>
+      <div className="mb-4">
+        <label htmlFor="workDaysPerMonth" className="inline-block min-w-[150px] text-gray-700 dark:text-gray-300">每月工作天数: </label>
         <input 
           type="number" 
           id="workDaysPerMonth" 
           value={workDaysPerMonth}
           onChange={(e) => setWorkDaysPerMonth(Number(e.target.value))}
-          style={inputStyle}
+          className="p-1 ml-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[calc(100%-160px)]"
         />
       </div>
-      <div style={formRowStyle}>
-        <label htmlFor="workHoursPerDay" style={labelStyle}>每日名义工作小时: </label>
+      <div className="mb-4">
+        <label htmlFor="workHoursPerDay" className="inline-block min-w-[150px] text-gray-700 dark:text-gray-300">每日名义工作小时: </label>
         <input 
           type="number" 
           id="workHoursPerDay" 
           value={workHoursPerDay}
           onChange={(e) => setWorkHoursPerDay(Number(e.target.value))}
-          style={inputStyle}
+          className="p-1 ml-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[calc(100%-160px)]"
         />
       </div>
-      <div style={formRowStyle}>
-        <label htmlFor="workStartTime" style={labelStyle}>上班时间 (HH:MM): </label>
+      <div className="mb-4">
+        <label htmlFor="workStartTime" className="inline-block min-w-[150px] text-gray-700 dark:text-gray-300">上班时间 (HH:MM): </label>
         <input 
           type="time" 
           id="workStartTime" 
           value={workStartTime}
           onChange={(e) => setWorkStartTime(e.target.value)}
-          style={inputStyle}
+          className="p-1 ml-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[calc(100%-160px)]"
         />
       </div>
-      <div style={formRowStyle}>
-        <label htmlFor="workEndTime" style={labelStyle}>下班时间 (HH:MM): </label>
+      <div className="mb-4">
+        <label htmlFor="workEndTime" className="inline-block min-w-[150px] text-gray-700 dark:text-gray-300">下班时间 (HH:MM): </label>
         <input 
           type="time" 
           id="workEndTime" 
           value={workEndTime}
           onChange={(e) => setWorkEndTime(e.target.value)}
-          style={inputStyle}
+          className="p-1 ml-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[calc(100%-160px)]"
         />
       </div>
-      <div style={formRowStyle}>
-        <label htmlFor="lunchBreakHours" style={labelStyle}>午休小时数: </label>
+      <div className="mb-4">
+        <label htmlFor="lunchBreakHours" className="inline-block min-w-[150px] text-gray-700 dark:text-gray-300">午休小时数: </label>
         <input 
           type="number" 
           id="lunchBreakHours" 
@@ -246,24 +246,24 @@ const AboutPage = () => {
           min="0"
           step="0.5"
           onChange={(e) => setLunchBreakHours(Number(e.target.value))}
-          style={inputStyle}
+          className="p-1 ml-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white min-w-[calc(100%-160px)]"
         />
       </div>
 
-      <div style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #eee' }}>
-        <h3 style={{ fontSize: '18px', color: '#555' }}>
-          您当月的日薪: <span style={{ color: 'green',fontWeight:700,fontSize:20 }}>{showSalary ? accumulatedDaily.toFixed(2) :'***'}</span> 元
+      <div className="mt-8 pt-5 border-t border-gray-300 dark:border-gray-600">
+        <h3 className="text-lg text-gray-600 dark:text-gray-400 mb-2">
+          您当月的日薪: <span className="text-green-600 dark:text-green-400 font-bold text-xl">{showSalary ? accumulatedDaily.toFixed(2) :'***'}</span> 元
         </h3>
-        <h3 style={{ fontSize: '18px', color: '#555' }}>
-          您目前已挣得: <span style={{ color: 'green',fontWeight:700,fontSize:20 }}>{showSalary ? accumulatedSalary.toFixed(2):'***'}</span> 元
+        <h3 className="text-lg text-gray-600 dark:text-gray-400 mb-2">
+          您目前已挣得: <span className="text-green-600 dark:text-green-400 font-bold text-xl">{showSalary ? accumulatedSalary.toFixed(2):'***'}</span> 元
         </h3>
-        <h3 style={{ fontSize: '18px', color: '#555' }}>
-          今天还需 <span style={{ color: 'orange', fontWeight:700, fontSize:20 }}>{remainingTimeToday}</span> 即可完成任务
+        <h3 className="text-lg text-gray-600 dark:text-gray-400 mb-2">
+          今天还需 <span className="text-orange-600 dark:text-orange-400 font-bold text-xl">{remainingTimeToday}</span> 即可完成任务
         </h3>
       </div>
 
       {isTodayCalculationComplete && (
-        <p style={{ color: 'blue', marginTop: '20px', fontSize: '1em', textAlign: 'center', backgroundColor: '#e6f7ff', padding: '10px', borderRadius: '4px' }}>
+        <p className="text-blue-600 dark:text-blue-400 mt-5 text-base text-center bg-blue-50 dark:bg-blue-900/20 p-3 rounded">
           提示：今日工资已计算完毕，计时器已停止。若要重新计算，请修改上方参数。
         </p>
       )}

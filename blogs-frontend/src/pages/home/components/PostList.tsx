@@ -90,7 +90,7 @@ const PostList = ({
     <>
       <div
         id="post_container"
-        className="flex flex-row justify-start items-start gap-2 bg-gray-100"
+        className="flex flex-row justify-start items-start gap-2"
       >
         {columnsDataList.map((column, colIndex) => (
           <div

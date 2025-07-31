@@ -20,6 +20,10 @@
   border-radius: 24px;
 }
 
+.dark .slider {
+  background-color: #555;
+}
+
 .slider:before {
   position: absolute;
   content: "";
@@ -32,8 +36,16 @@
   border-radius: 50%;
 }
 
+.dark .slider:before {
+  background-color: #f0f0f0;
+}
+
 input:checked + .slider {
   background-color: #4CAF50;
+}
+
+.dark input:checked + .slider {
+  background-color: #45a049;
 }
 
 input:checked + .slider:before {
