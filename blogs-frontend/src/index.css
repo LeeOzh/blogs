@@ -46,3 +46,13 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+
+/* 确保PostList容器正确渲染 */
+#post_container {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+#post_container > div {
+  box-sizing: border-box;
+}

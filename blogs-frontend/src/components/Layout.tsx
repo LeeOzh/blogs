@@ -111,12 +111,10 @@ const Layout = () => {
 
       {/* 主内容区 */}
       <main>
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <SimpleBar style={{ maxHeight: '100vh' }}>
-            <div className="pt-16 md:pt-20">
-              <Outlet />
-            </div>
-          </SimpleBar>
+        <div className="max-w-6xl mx-auto px-4 md:px-6 pt-1.5" >
+          <div className="pt-16 md:pt-20 w-full">
+            <Outlet />
+          </div>
         </div>
       </main>
     </div>
