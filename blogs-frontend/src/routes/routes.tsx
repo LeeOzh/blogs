@@ -5,6 +5,7 @@ import Layout from "@/components/Layout";
 import CreatePost from "@/pages/create";
 import Tools from "@/pages/tools";
 import StyleTransfer from "@/pages/style-transfer";
+import Resume from "@/pages/resume";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
           <Route path="/add" element={<CreatePost />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/style-transfer" element={<StyleTransfer />} />
+          <Route path="/resume" element={<Resume />} />
         </Route>
       </Routes>
     </Router>

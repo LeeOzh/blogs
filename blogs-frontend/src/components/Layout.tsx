@@ -81,6 +81,7 @@ const Layout = () => {
             <MenuItem text="Tools" to="/tools" onClick={closeMenu} />
             <MenuItem text="ADD" to="/add" onClick={closeMenu} />
             <MenuItem text="AI Transfer " to="/style-transfer" onClick={closeMenu} />
+            <MenuItem text="Resume" to="/resume" onClick={closeMenu} />
           </div>
         </div>
       </header>
@@ -94,6 +95,7 @@ const Layout = () => {
             <MenuItem text="Tools" to="/tools" />
             <MenuItem text="ADD" to="/add" />
             <MenuItem text="AI Transfer " to="/style-transfer" />
+            <MenuItem text="Resume" to="/resume" />
           </nav>
 
           {/* 桌面端主题切换 */}

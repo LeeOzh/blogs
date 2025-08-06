@@ -15,6 +15,20 @@
   color-scheme: light;
 }
 
+/* PDF导出优化样式 */
+@media print {
+  .resume-content {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .resume-content * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
