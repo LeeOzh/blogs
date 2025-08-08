@@ -22,3 +22,90 @@ model Post {
   like      Int      @default(0)
   createdAt DateTime @default(now())
 }
+
+// 工具分类表
+model ToolCategory {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  icon      String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  tools     Tool[]
+  
+  @@map("tool_categories")
+}
+
+// 工具表
+model Tool {
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String
+  icon          String?
+  categoryId    Int
+  color         String?
+  componentName String?      // React组件名称
+  url           String?      // 外部链接
+  type          ToolType     @default(INTERNAL)
+  status        ToolStatus   @default(DEVELOPING)
+  clickCount    Int          @default(0)
+  sortOrder     Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  
+  category      ToolCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  @@map("tools")
+}
+
+// 网站分类表
+model WebsiteCategory {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  icon      String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  websites  Website[]
+  
+  @@map("website_categories")
+}
+
+// 网站表
+model Website {
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String
+  icon        String?
+  categoryId  Int
+  color       String?
+  url         String
+  clickCount  Int             @default(0)
+  sortOrder   Int             @default(0)
+  status      WebsiteStatus   @default(ACTIVE)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  category    WebsiteCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  @@map("websites")
+}
+
+// 枚举类型
+enum ToolType {
+  INTERNAL  // 内部工具
+  EXTERNAL  // 外部链接
+}
+
+enum ToolStatus {
+  ACTIVE      // 可用
+  DEVELOPING  // 开发中
+  DISABLED    // 已禁用
+}
+
+enum WebsiteStatus {
+  ACTIVE    // 可用
+  DISABLED  // 已禁用
+}

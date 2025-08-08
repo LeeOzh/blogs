@@ -79,7 +79,6 @@ const Layout = () => {
           <div className="flex flex-col gap-1 p-4">
             <MenuItem text="HOME" to="/" onClick={closeMenu} />
             <MenuItem text="Tools" to="/tools" onClick={closeMenu} />
-            <MenuItem text="ADD" to="/add" onClick={closeMenu} />
             <MenuItem text="AI Transfer " to="/style-transfer" onClick={closeMenu} />
             <MenuItem text="Resume" to="/resume" onClick={closeMenu} />
           </div>
@@ -93,7 +92,6 @@ const Layout = () => {
           <nav className="flex items-center gap-1 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-gray-200 dark:border-gray-700 shadow-sm">
             <MenuItem text="HOME" to="/" />
             <MenuItem text="Tools" to="/tools" />
-            <MenuItem text="ADD" to="/add" />
             <MenuItem text="AI Transfer " to="/style-transfer" />
             <MenuItem text="Resume" to="/resume" />
           </nav>

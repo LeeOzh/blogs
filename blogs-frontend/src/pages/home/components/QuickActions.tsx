@@ -2,17 +2,7 @@ import { Link } from 'react-router-dom';
 
 const QuickActions = () => {
   const actions = [
-    {
-      title: '创建文章',
-      description: '分享你的想法和经验',
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-        </svg>
-      ),
-      to: '/add',
-      color: 'bg-blue-500 hover:bg-blue-600',
-    },
+
     {
       title: '实用工具',
       description: '各种开发和生活工具',

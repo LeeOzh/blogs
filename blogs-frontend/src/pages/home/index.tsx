@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPostList } from "../../services/post";
 import PostList from "./components/PostList";
-import PostGrid from "./components/PostGrid";
+
 import HeroSection from "./components/HeroSection";
 import CategoryFilter from "./components/CategoryFilter";
 import SearchBar from "./components/SearchBar";
@@ -21,7 +21,7 @@ const Home = () => {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [activeCategory, setActiveCategory] = useState('全部');
   const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState<'masonry' | 'grid'>('masonry');
+
 
   useEffect(() => {
     getPosts();
@@ -128,47 +128,11 @@ const Home = () => {
             )}
           </div>
           
-          {/* View Mode Toggle */}
-          <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
-            <button
-              onClick={() => setViewMode('masonry')}
-              className={`
-                p-2 rounded-md transition-colors duration-200
-                ${viewMode === 'masonry' 
-                  ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' 
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-                }
-              `}
-              title="瀑布流布局"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-              </svg>
-            </button>
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`
-                p-2 rounded-md transition-colors duration-200
-                ${viewMode === 'grid' 
-                  ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' 
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-                }
-              `}
-              title="网格布局"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 002 2m0 0v10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2z" />
-              </svg>
-            </button>
-          </div>
+
         </div>
         
         {filteredPosts.length > 0 ? (
-          viewMode === 'masonry' ? (
-            <PostList posts={filteredPosts} callback={getPosts} />
-          ) : (
-            <PostGrid posts={filteredPosts} callback={getPosts} />
-          )
+          <PostList posts={filteredPosts} callback={getPosts} />
         ) : (
           <div className="text-center py-12">
             <div className="text-gray-400 dark:text-gray-500 mb-4">
@@ -182,14 +146,7 @@ const Home = () => {
             <p className="text-gray-500 dark:text-gray-400 mb-6">
               {searchQuery ? '尝试使用其他关键词搜索' : '开始创作你的第一篇文章吧'}
             </p>
-            {!searchQuery && (
-              <button 
-                onClick={() => window.location.href = '#/add'}
-                className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200"
-              >
-                创建文章
-              </button>
-            )}
+
           </div>
         )}
       </div>

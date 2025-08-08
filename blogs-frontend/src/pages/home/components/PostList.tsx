@@ -1,5 +1,5 @@
-import PostCard from "@/components/PostCard";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { updatePostLike } from "@/services/post";
 
 const PostList = ({
   posts,
@@ -13,148 +13,159 @@ const PostList = ({
     imgUrl?: string;
     like: number;
   }[];
-  callback:() => void
+  callback: () => void
 }) => {
-  const [containerWidth, setContainerWidth] = useState<number>(0);
-  const [columns, setColumns] = useState<number>(1);
-  const [columnsDataList, setColumnsDataList] = useState<any[][]>([]);
-  const timer = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const resizeObserverRef = useRef<ResizeObserver | null>(null);
-
-  const columnConfig = [
-    { minWidth: 1400, column: 5 },
-    { minWidth: 1000, column: 4 },
-    { minWidth: 768, column: 3 },
-    { minWidth: 480, column: 2 },
-  ];
-
-  // 给每个 post 添加随机高度（模拟不同内容高度）
-  const enrichWithHeight = (data: typeof posts) =>
-    data.map((item) => ({
-      ...item,
-      estimatedHeight: 200 + Math.floor(Math.random() * 200), // 200~400 px
-    }));
-
-  // JS 分列逻辑（根据 estimatedHeight）
-  const distributeToColumns = (
-    data: ReturnType<typeof enrichWithHeight>,
-    columnCount: number
-  ) => {
-    const columns: any[][] = Array.from({ length: columnCount }, () => []);
-    const heights = new Array(columnCount).fill(0);
-
-    data.forEach((item) => {
-      const minIndex = heights.indexOf(Math.min(...heights));
-      columns[minIndex].push(item);
-      heights[minIndex] += (item.estimatedHeight+90);
-    });
-
-    return columns;
-  };
-
-  // 获取容器宽度
-  const getContainerWidth = useCallback(() => {
-    if (containerRef.current) {
-      const width = containerRef.current.clientWidth;
-      setContainerWidth(width);
-    } else {
-      // 如果容器还没有渲染，使用window宽度作为fallback
-      setContainerWidth(window.innerWidth - 32); // 减去padding
+  const handleLike = async (id: number) => {
+    let like = true;
+    const likeLocal = localStorage.getItem("likeData");
+    if (likeLocal) {
+      const likeData = JSON.parse(likeLocal);
+      if (likeData.includes(id)) {
+        like = false;
+      }
     }
-  }, []);
-
-  const timerListener = useCallback(() => {
-    clearTimeout(timer.current);
-    timer.current = setTimeout(() => {
-      getContainerWidth();
-    }, 500);
-  }, [getContainerWidth]);
-
-  // 初始化和 resize
-  useEffect(() => {
-    // 使用ResizeObserver监听容器大小变化
-    if (containerRef.current && 'ResizeObserver' in window) {
-      resizeObserverRef.current = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          const width = entry.contentRect.width;
-          setContainerWidth(width);
-        }
+    
+    try {
+      const res = await updatePostLike({
+        id,
+        like
       });
       
-      resizeObserverRef.current.observe(containerRef.current);
-    } else {
-      // 降级到传统方法
-      const timer = setTimeout(() => {
-        getContainerWidth();
-      }, 100);
-      
-      window.addEventListener("resize", timerListener);
-      
-      return () => {
-        clearTimeout(timer);
-        window.removeEventListener("resize", timerListener);
-      };
-    }
-
-    return () => {
-      if (resizeObserverRef.current) {
-        resizeObserverRef.current.disconnect();
+      if (res?.data === 'success') {
+        const likeLocal = localStorage.getItem("likeData");
+        if (likeLocal) {
+          const likeData = JSON.parse(likeLocal);
+          if (!like) {
+            const index = likeData.indexOf(id);
+            likeData.splice(index, 1);
+          } else {
+            likeData.push(id);
+          }
+          localStorage.setItem("likeData", JSON.stringify(likeData));
+        } else {
+          localStorage.setItem("likeData", JSON.stringify([id]));
+        }
+        callback();
       }
-    };
-  }, [getContainerWidth, timerListener]);
-
-  // 根据宽度设定列数
-  useEffect(() => {
-    if (containerWidth === 0) return; // 等待容器宽度获取完成
-    
-    const obj = columnConfig.find((item) => containerWidth >= item.minWidth);
-    const newColumns = obj?.column || 1;
-    
-    // 只有当列数真正改变时才更新
-    if (newColumns !== columns) {
-      setColumns(newColumns);
+    } catch (error) {
+      console.error('点赞失败:', error);
     }
-  }, [containerWidth, columns]);
+  };
 
-  // 初始化分布
-  useEffect(() => {
-    const enriched = enrichWithHeight(posts);
-    const distributed = distributeToColumns(enriched, columns);
-    setColumnsDataList(distributed);
-  }, [columns, posts]);
+  const isLiked = (id: number) => {
+    const likeLocal = localStorage.getItem("likeData");
+    if (likeLocal) {
+      const likeData = JSON.parse(likeLocal);
+      return likeData.includes(id);
+    }
+    return false;
+  };
 
   return (
-    <>
-      <div
-        ref={containerRef}
-        id="post_container"
-        className="w-full flex flex-row justify-start items-start gap-2"
-        style={{ minHeight: '200px' }}
-      >
-        {columnsDataList.length > 0 ? (
-          columnsDataList.map((column, colIndex) => (
-            <div
-              key={colIndex}
-              className="flex flex-1 flex-col min-h-0 items-center gap-2"
-              style={{ width: `${100 / columns}%` }}
-            >
-              {column.map((item) => (
-                <PostCard
-                  key={item.id}
-                  {...item}
-                  callBack={callback}
-                />
-              ))}
+    <div className="space-y-4">
+      {posts.map((post) => (
+        <div
+          key={post.id}
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
+        >
+          <div className="flex gap-6">
+            {/* 左侧内容 */}
+            <div className="flex-1">
+              {/* 标题 */}
+              <Link to={`/post/${post.id}`}>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-2">
+                  {post.title}
+                </h2>
+              </Link>
+
+              {/* 内容摘要 */}
+              <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 leading-relaxed">
+                {post.content.replace(/<[^>]*>/g, '').substring(0, 150)}...
+              </p>
+
+              {/* 底部信息 */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                  {/* 作者信息 */}
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                      <img className="w-4 h-4" src="/nm.svg" alt="" />
+                    </div>
+                    <span>匿名牛马</span>
+                  </div>
+
+                  {/* 发布时间 */}
+                  <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+
+                  {/* 阅读数 */}
+                  <div className="flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span>{Math.floor(Math.random() * 1000) + 100}</span>
+                  </div>
+                </div>
+
+                {/* 点赞按钮 */}
+                <button
+                  onClick={() => handleLike(post.id)}
+                  className="flex items-center gap-2 px-3 py-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group"
+                >
+                  {isLiked(post.id) ? (
+                    <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  )}
+                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                    {post.like}
+                  </span>
+                </button>
+              </div>
             </div>
-          ))
-        ) : (
-          <div className="w-full text-center py-8 text-gray-500">
-            加载中...
+
+            {/* 右侧缩略图 */}
+            {post.imgUrl && (
+              <Link to={`/post/${post.id}`} className="flex-shrink-0">
+                <div className="w-32 h-24 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700 group">
+                  <img
+                    src={post.imgUrl}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                  />
+                </div>
+              </Link>
+            )}
           </div>
-        )}
-      </div>
-    </>
+
+          {/* 标签区域 */}
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-xs rounded-full">
+                前端
+              </span>
+              <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 text-xs rounded-full">
+                技术
+              </span>
+            </div>
+            
+            <Link
+              to={`/post/${post.id}`}
+              className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors flex items-center gap-1"
+            >
+              <span>阅读全文</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
