@@ -1,0 +1,82 @@
+/* SimpleBar 自定义样式 */
+
+/* 默认隐藏滚动条 */
+.simplebar-scrollbar::before {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 鼠标悬停时显示滚动条 */
+.simplebar-scrollbar:hover::before,
+.simplebar-content-wrapper:hover ~ .simplebar-track .simplebar-scrollbar::before,
+.simplebar-content:hover ~ .simplebar-track .simplebar-scrollbar::before {
+  opacity: 1;
+}
+
+/* 滚动时显示滚动条 */
+.simplebar-scrollbar.simplebar-visible::before {
+  opacity: 1;
+}
+
+/* 滚动条轨道透明 */
+.simplebar-track {
+  background: transparent !important;
+}
+
+/* 滚动条样式 */
+.simplebar-scrollbar::before {
+  border-radius: 4px;
+  transition: opacity 0.3s ease, background-color 0.2s ease;
+}
+
+/* 暗色模式下的滚动条 */
+.dark .simplebar-scrollbar::before {
+  background-color: rgba(156, 163, 175, 0.6) !important;
+}
+
+.dark .simplebar-scrollbar:hover::before {
+  background-color: rgba(156, 163, 175, 0.8) !important;
+}
+
+/* 亮色模式下的滚动条 */
+.simplebar-scrollbar::before {
+  background-color: rgba(107, 114, 128, 0.4) !important;
+}
+
+.simplebar-scrollbar:hover::before {
+  background-color: rgba(107, 114, 128, 0.6) !important;
+}
+
+/* 编辑器区域的滚动条样式 */
+.resume-editor .simplebar-scrollbar::before {
+  background-color: rgba(107, 114, 128, 0.4) !important;
+}
+
+.resume-editor .simplebar-scrollbar:hover::before {
+  background-color: rgba(107, 114, 128, 0.6) !important;
+}
+
+.dark .resume-editor .simplebar-scrollbar::before {
+  background-color: rgba(156, 163, 175, 0.5) !important;
+}
+
+.dark .resume-editor .simplebar-scrollbar:hover::before {
+  background-color: rgba(156, 163, 175, 0.7) !important;
+}
+
+/* 预览区域的滚动条样式 */
+.resume-preview .simplebar-scrollbar::before {
+  background-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+.resume-preview .simplebar-scrollbar:hover::before {
+  background-color: rgba(59, 130, 246, 0.6) !important;
+}
+
+.dark .resume-preview .simplebar-scrollbar::before {
+  background-color: rgba(96, 165, 250, 0.5) !important;
+}
+
+.dark .resume-preview .simplebar-scrollbar:hover::before {
+  background-color: rgba(96, 165, 250, 0.7) !important;
+}
